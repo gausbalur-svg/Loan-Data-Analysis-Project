@@ -175,6 +175,7 @@ FROM CARD_2
 where loan_amount_term < 180 and loan_status ='Y'
 group by 1;
 `
+
 **Gender-Based Loan Requests**
 
 * Compared average loan amounts requested by male vs female applicants.
@@ -185,6 +186,7 @@ group by 1;
 from card_2
 group by 1;
 `
+
 **High-Income Non-Approvals**
 
 * Listed top 5 highest-income applicants who were not approved, including income, loan amount, and education.
@@ -200,3 +202,18 @@ where loan_status ='N'
 order by applicantincome desc limit 5
 `
 
+## 📈 Business Insights
+* Credit history is the strongest predictor of loan approval.
+
+* Higher-income groups tend to request larger loans, but approval depends more on credit history than income.
+
+* Urban property areas show higher approval rates compared to rural ones.
+
+* Male applicants generally request higher loan amounts than female applicants.
+
+* A significant number of high-income applicants still face rejection, highlighting the importance of creditworthiness over income.
+
+**Conclusion**
+
+This project demonstrates how **SQL-based data cleaning and EDA** can uncover valuable insights into loan approval trends.
+The findings can help financial institutions refine their **risk assessment models** and improve l**oan approval strategies**.
