@@ -18,20 +18,19 @@ applicant demographics, and financial patterns.
 
     * Standardized Dependents column:
 
-Converted '3+' values to 4.
+    * Converted '3+' values to 4.
 
-Changed data type from text to int.
+    * Changed data type from text to int.
 
-Replaced NULL values with 0.
+    * Replaced NULL values with 0.
+*  **Handled missing values:**
 
-Handled missing values:
+   * Filled self_employed with 'No'.
 
-Filled self_employed with 'No'.
+   * Replaced missing credit_history with 0.
 
-Replaced missing credit_history with 0.
+   * Imputed missing loanamount and loan_amount_term using average values.
 
-Imputed missing loanamount and loan_amount_term using average values.
+   * Updated loan_status based on applicant income thresholds.
 
-Updated loan_status based on applicant income thresholds.
-
-Removed incomplete records with missing critical fields (loan_id, gender, married).
+   * Removed incomplete records with missing critical fields (loan_id, gender, married).
