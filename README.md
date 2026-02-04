@@ -42,11 +42,22 @@ applicant demographics, and financial patterns.
 * Loan Approval by Demographics
 
 ``select * from card_2;``
-
-
 Compared approval rates across Gender, Education, and Marital Status.
-``
-
+`SELECT 	Gender ,Education , married,
+	COUNT(*) AS TOTAL_APPLICANT,
+	 SUM(CASE
+		 	WHEN loan_status = 'Y' then 1
+			 else 0 
+			 end) as Approved ,
+	
+	round(100.0*sum(case 
+	when loan_status = 'Y' then 1 
+	else 0 
+	end)/count(*),2) as approval_rate
+	from card_2
+group by Gender ,Education , married
+order by approval_rate ;
+`
 Impact of Credit History
 
 Measured how credit history influences loan approval rates.
