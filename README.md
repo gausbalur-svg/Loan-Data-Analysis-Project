@@ -44,6 +44,7 @@ applicant demographics, and financial patterns.
 ``select * from card_2;``
 
 Compared approval rates across Gender, Education, and Marital Status.
+
 `SELECT 	Gender ,Education , married,
 	COUNT(*) AS TOTAL_APPLICANT,
 	 SUM(CASE
@@ -61,6 +62,7 @@ order by approval_rate ;
 **Impact of Credit History**
 
 * Measured how credit history influences loan approval rates.
+
   ``SELECT credit_history,
  	 COUNT(*) AS total_applicants, 
 	  sum(
@@ -75,34 +77,126 @@ group by credit_history
 order by approval_rate;
 ``
 
-Income vs Loan Amount
+**Income vs Loan Amount**
 
-Grouped applicants into Lower, Middle, Higher Income categories.
+* Grouped applicants into Lower, Middle, Higher Income categories.
 
-Analyzed whether higher-income applicants receive larger loans.
+`SELECT 
+ 	CASE 
+	 	WHEN applicantincome <2000 then 'Lower Income'
+		WHEN applicantincome  BETWEEN 2000 AND 5000 THEN 'Middle Income'
+		ELSE 'Higher Income'
+		END as income_group,
+		round(avg(loanamount),3) as avg_loan,
+		round(avg(applicantincome),2) as avg_income
+from card_2
+group by income_group 
+order  by avg_loan desc;
+`
 
-Property Area Analysis
+* Analyzed whether higher-income applicants receive larger loans.
 
-Identified which property areas have the highest loan approval rates.
+  `SELECT 
+ 	CASE 
+	 	WHEN applicantincome <2000 then 'Lower Income'
+		WHEN applicantincome  BETWEEN 2000 AND 5000 THEN 'Middle Income'
+		ELSE 'Higher Income'
+		END as income_group,
+		round(avg(loanamount),3) as avg_loan,
+		round(avg(applicantincome),2) as avg_income
+from card_2
+group by income_group 
+order  by avg_loan desc;
+` 
 
-Loan-to-Income Ratio
+**Property Area Analysis**
 
-Calculated average loan-to-income ratio for approved loans.
+* Identified which property areas have the highest loan approval rates.
 
-Top Applicants
+ ``
+ select  property_area,
+	count(*) as total_applicants,
+	sum( case 
+		when loan_status = 'Y' then 1 
+		else 0 end) as approve,
+		round(100.0*sum(case 
+			when loan_status = 'Y' then 1
+			else 0 end)/count(*),2) as approval_rate
+from card_2
+group by 1
+order by 3;
+``
 
-Listed top 10 highest-income applicants not approved.
 
+**Loan-to-Income Ratio**
+
+* Calculated average loan-to-income ratio for approved loans.
+
+  `select
+	round(avg(loanamount::numeric/nullif(applicantincome,0)),2) as avg_loan_ratio,
+	avg(loanamount) as avg_loanamount
+	from card_2
+	where loan_status ='Y';
+`
+
+**Top Applicants**
+
+ * Listed top 10 highest-income applicants not approved.
+
+`
+select loan_id,credit_history,
+ 		applicantincome 
+		 from card_2
+where  loan_status ='N'
+order by applicantincome desc limit 10
+`
 Listed top 10 applicants with the highest loan amounts approved.
 
-Loan Term Analysis
+`
+select loan_id,credit_history,
+		Gender ,
+		Education ,
+		married,
+ 		applicantincome 
+		 from card_2
+where  loan_status ='Y'
+order by applicantincome desc limit 10
+`
 
-Counted approved applicants with loan terms < 180 days, grouped by property area.
+**Loan Term Analysis**
 
-Gender-Based Loan Requests
+* Counted approved applicants with loan terms < 180 days, grouped by property area.
 
-Compared average loan amounts requested by male vs female applicants.
+`
+SELECT 
+ 	property_area,
+ 	COUNT(*) AS TOTAL_APPLICANTS
+FROM CARD_2
+where loan_amount_term < 180 and loan_status ='Y'
+group by 1;
+`
+**Gender-Based Loan Requests**
 
-High-Income Non-Approvals
+* Compared average loan amounts requested by male vs female applicants.
 
-Listed top 5 highest-income applicants who were not approved, including income, loan amount, and education.
+`SELECT 
+	gender,
+	round(avg(loanamount),2) as avg_loanamount
+from card_2
+group by 1;
+`
+**High-Income Non-Approvals**
+
+* Listed top 5 highest-income applicants who were not approved, including income, loan amount, and education.
+
+`
+SELECT 
+	loan_id,
+	applicantincome,
+	loanamount,
+	education 
+from card_2
+where loan_status ='N'
+order by applicantincome desc limit 5
+`
+
