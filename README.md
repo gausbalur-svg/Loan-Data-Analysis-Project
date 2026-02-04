@@ -34,3 +34,51 @@ applicant demographics, and financial patterns.
    * Updated loan_status based on applicant income thresholds.
 
    * Removed incomplete records with missing critical fields (loan_id, gender, married).
+ 
+## 📊 Exploratory Data Analysis (EDA)
+
+ **Key business questions addressed:**
+
+* Loan Approval by Demographics
+
+``select * from card_2;``
+
+
+Compared approval rates across Gender, Education, and Marital Status.
+``
+
+Impact of Credit History
+
+Measured how credit history influences loan approval rates.
+
+Income vs Loan Amount
+
+Grouped applicants into Lower, Middle, Higher Income categories.
+
+Analyzed whether higher-income applicants receive larger loans.
+
+Property Area Analysis
+
+Identified which property areas have the highest loan approval rates.
+
+Loan-to-Income Ratio
+
+Calculated average loan-to-income ratio for approved loans.
+
+Top Applicants
+
+Listed top 10 highest-income applicants not approved.
+
+Listed top 10 applicants with the highest loan amounts approved.
+
+Loan Term Analysis
+
+Counted approved applicants with loan terms < 180 days, grouped by property area.
+
+Gender-Based Loan Requests
+
+Compared average loan amounts requested by male vs female applicants.
+
+High-Income Non-Approvals
+
+Listed top 5 highest-income applicants who were not approved, including income, loan amount, and education.
