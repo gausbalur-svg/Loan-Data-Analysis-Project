@@ -14,7 +14,7 @@ applicant demographics, and financial patterns.
 - Serve as a portfolio-ready project that illustrates practical SQL skills, business intelligence thinking, and data storytelling.
 
 ## Data Preparation & Cleaning
-* Created tables (card_1, card_2) with applicant and loan details.
+* **Created tables (card_1, card_2) with applicant and loan details.**
 
 Standardized Dependents column:
 
