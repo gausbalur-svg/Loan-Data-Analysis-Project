@@ -16,7 +16,7 @@ applicant demographics, and financial patterns.
 ## Data Preparation & Cleaning
 * **Created tables (card_1, card_2) with applicant and loan details.**
 
-Standardized Dependents column:
+    *Standardized Dependents column:
 
 Converted '3+' values to 4.
 
